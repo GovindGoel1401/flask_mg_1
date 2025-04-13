@@ -7,5 +7,6 @@ class TodoForm(FlaskForm):
     description = TextAreaField("Description", validators=[DataRequired()])
     completed = SelectField("Completed", 
                             choices=[("False", "False"), ("True", "True")], 
+                            coerce=bool,
                             validators=[DataRequired()])
     submit = SubmitField("Add Todo")
