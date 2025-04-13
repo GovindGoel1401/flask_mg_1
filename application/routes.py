@@ -1,5 +1,5 @@
 from application import app
-from flask import render_template, flash, request,redirect,url_for
+from flask import redirect,render_template, flash, request,redirect,url_for
 
 from datetime import datetime
 
@@ -65,3 +65,10 @@ def update_todo(id):
         form.description.data=todo.get("description",None)
         form.completed.data= todo.get("completed",None)
     return render_template("add_todo.html", form=form )    
+@app.route("/delete_todo/<id>")
+def delete_todo(id):
+    db.todo_flask.find_one_and_delete({"_id": ObjectId(id)})
+    flash("Todo deleted","success")
+    return redirect("/")
+    
+    
